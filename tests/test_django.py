@@ -1,20 +1,18 @@
 from selenium import webdriver
 
-# Setup browser - Firefox <3
-browser = webdriver.Firefox()
+class NewVisitorTest():
+    def setup(self):
+        browser = webdriver.Firefox()
+    def teardown(self):
+        self.browser.quit()
+    
+    def test_can_start_a_todo_list(self):
+        # Edith has heard about a cool new online todo app
+        # She goes to the browser to view the homepage
+        self.browser.get("http://localhost:8000/?")
 
-# confirm that django is installed and is running
-def test_django_installed_and_running():
-    browser.get("http://localhost:8000")
-    assert "Congratulations!" in browser.title
+        # She notices that the page title mentions todo lists
+        assert "To-Do" in browser.title
 
-# Test Website Title
-def test_todolist_homepage_title():
-    expected_title = "To-Do"
-    assert expected_title is browser.title 
-
-# Test if users can add todo item right away
-
-# Test if user can type into the text box
-
-# Test if the user can add a todo list element
+        # She is invited to enter a to-do item straight away
+        assert "Fail the test" is 0
