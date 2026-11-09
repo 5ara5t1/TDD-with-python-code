@@ -8,11 +8,11 @@ def browser():
     yield browser
     browser.quit()
 
-# using plain functions for testing 
-def test_can_start_a_todo_list(browser):
+# using plain functions for testing, using liver server fixture
+def test_can_start_a_todo_list(live_server, browser):
     # Edith has heard about a cool new online todo app
     # She goes to the browser to view the homepage
-    browser.get("http://localhost:8000/?")
+    browser.get(live_server.url)
 
     # She notices that the page title mentions todo lists
     assert "To-Do" in browser.title
