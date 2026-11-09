@@ -13,3 +13,7 @@ def test_home_page_returns_correct_html():
     assert "<title>To-Do</title>" in html
     assert html.startswith("<html>")
     assert html.endswith("</html>")
+
+def test_home_page_returns_correct_html_2(client):
+    response = client.get("/")
+    assertContains("<title>To-Do</title>", response)
