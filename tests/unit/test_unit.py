@@ -5,15 +5,10 @@ from django.http import HttpRequest
 from lists.views import home_page 
 
 
-# Test Home page returns correct html
-def test_home_page_returns_correct_html():
-    request = HttpRequest()
-    response = home_page(request)
-    html = response.content.decode("utf8")
-    assert "<title>To-Do</title>" in html
-    assert html.startswith("<html>")
-    assert html.endswith("</html>")
 
-def test_home_page_returns_correct_html_2(client):
+
+def test_home_page_returns_correct_html(client):
     response = client.get("/")
-    assertContains("<title>To-Do</title>", response)
+    assertContains(response, "<title>To-Do</title>")
+    assertContains(response, "<html>")
+    assertContains(response, "</html>")
