@@ -9,10 +9,10 @@ def browser():
     browser.quit()
 
 # using plain functions for testing 
-def test_can_start_a_todo_list(self):
+def test_can_start_a_todo_list(browser):
     # Edith has heard about a cool new online todo app
     # She goes to the browser to view the homepage
-    self.browser.get("http://localhost:8000/?")
+    browser.get("http://localhost:8000/?")
 
     # She notices that the page title mentions todo lists
     assert "To-Do" in browser.title
