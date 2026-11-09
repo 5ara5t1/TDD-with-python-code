@@ -1,5 +1,5 @@
 [project]
-name = "tdd-with-python-code"
+name = "superlists"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -9,11 +9,9 @@ authors = [
 requires-python = ">=3.13"
 dependencies = [
     "django<6",
+    "pytest>=9.2.0",
     "selenium>=4.52.0",
 ]
-
-[project.scripts]
-tdd-with-python-code = "tdd_with_python_code:main"
 
 [build-system]
 requires = ["uv_build>=0.13.7,<0.14.0"]
