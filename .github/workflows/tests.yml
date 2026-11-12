@@ -20,9 +20,9 @@ jobs:
         run: uv add ruff
       - name: lint code with ruff
         run: uv run ruff check --output-format=github --target-version=py314
-      - name: check code formatting with ruff
-        run: uv run ruff format --diff --target-version=39
-        continue-on-error: true
+      # - name: check code formatting with ruff
+      #   run: uv run ruff format --diff --target-version=py314
+      #   continue-on-error: true
      
     
   unit-tests:
