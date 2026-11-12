@@ -2,7 +2,7 @@ name: ci
 on: [push, pull_request]
 
 jobs:
-   linting:
+  linting:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,8 +21,9 @@ jobs:
       - name: lint code with ruff
         run: ruff check --output-format=github --target-version=py314
       - name: check code formatting with ruff
-        run: ruff format --diff --target-version=py314
+        run: ruff format --diff --target-version=39
         continue-on-error: true
+     
     
   unit-tests:
     needs: linting
