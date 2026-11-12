@@ -32,7 +32,7 @@ jobs:
       - run: uv sync
       - run: firefox --version && geckodriver --version  ## sanity check
       - run: uv run pytest tests/functional/* -v --reruns 1
-      - uses: actions/upload-artifacts@v4 # pin by SHA like others
+      - uses: actions/upload-artifact@v4 # pin by SHA like others
         if: failure()
         with: 
           name: selenium-artifacts
