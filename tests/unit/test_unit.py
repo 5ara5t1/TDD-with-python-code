@@ -1,10 +1,6 @@
 # Utilizing pytest_django
 
-from pytest_django.asserts import assertTemplateUsed, assertContains
-from django.http import HttpRequest
-from lists.views import home_page 
-
-
+from pytest_django.asserts import assertContains
 
 
 def test_home_page_returns_correct_html(client):
