@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [">=3.13"]
+        python-version: ["3.13", "3.14"]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -32,7 +32,7 @@ jobs:
       - run: uv sync
       - run: firefox --version && geckodriver --version  ## sanity check
       - run: uv run pytest tests/functional/* -v --reruns 1
-      - uses: actions/upload-artifacts@4 # pin by SHA like others
+      - uses: actions/upload-artifacts@v4 # pin by SHA like others
         if: failure()
         with: 
           name: selenium-artifacts
