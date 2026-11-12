@@ -2,6 +2,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
+
 # Using pytest fixtures
 @pytest.fixture
 def browser():
