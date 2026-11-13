@@ -3,7 +3,6 @@
 from pytest_django.asserts import assertContains, assertTemplateUsed
 
 
-
 def test_uses_home_template(client):
     response = client.get("/")
     assertTemplateUsed(response, "home.html")

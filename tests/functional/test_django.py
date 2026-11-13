@@ -1,9 +1,10 @@
+import time
+
 import pytest
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-import time
+from selenium.webdriver.firefox.options import Options
 
 
 # Using pytest fixtures
@@ -48,4 +49,4 @@ def test_can_start_a_todo_list(live_server, browser):
 
     # There is still a text box inviting her to add another item
     # She enters "use peacock feathers to make fly"
-    self.fail("Finish the Tests")
+    pytest.fail("Finish the Tests")
