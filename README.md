@@ -1,8 +1,34 @@
 # TDD-with-python-code
-This repository contains hand implemented code created while reading Test Driven Development with Python 3rd edition by Harry Percival. I often find that the best way to learn the material from a text is to read the text, implement any code or material by hand, and review everything the next day. All code in this repository belongs to the original author, barring any changes or additions from myself. You can find the text [here](https://www.obeythetestinggoat.com/pages/book.html#toc) on his website. No LLMs or agents were utilized for implementation. 
 
-## Structure
-Each the code and exercises from each chapter lie within labeled directories. Each is a uv package with a tests file for tests. you can run the tests with 
-``` bash
-    uv run pytest c##/tests -v
+![ci](https://github.com/5ara5t1/TDD-with-python-code/actions/workflows/tests.yml/badge.svg)
+
+A Django to-do list app built test-first while working through [Test-Driven Development with Python](https://www.obeythetestinggoat.com/) (3rd edition) by Harry Percival.
+
+I typed every line by hand and reviewed each chapter the next day. The app design and most of the code follow the book. The CI pipeline and project tooling are my own additions; I used an LLM and web searches to debug the pipeline and answer GitHub Actions questions.
+
+## What's here
+
+- `src/`: the Django project (`superlists`) and its `lists` app
+- `tests/unit/`: unit tests, run with pytest
+- `tests/functional/`: browser tests with Selenium and Firefox
+- `.github/workflows/tests.yml`: the CI pipeline
+
+Each chapter is developed on its own branch (`ch03`, `ch04`, ...) and merged into `main`.
+
+## CI
+
+Every push and pull request runs three jobs in order, each gating the next:
+
+1. Lint with ruff
+2. Unit tests
+3. Functional tests in headless Firefox, with one retry and artifacts uploaded on failure
+
+## Run it
+
+Requires [uv](https://docs.astral.sh/uv/). The functional tests also need Firefox and geckodriver.
+
+```bash
+uv sync
+uv run pytest tests/unit -v
+uv run pytest tests/functional -v
 ```
