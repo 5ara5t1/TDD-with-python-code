@@ -1,10 +1,13 @@
 # Utilizing pytest_django
 
-from pytest_django.asserts import assertContains
+from pytest_django.asserts import assertContains, assertTemplateUsed
 
 
-def test_home_page_returns_correct_html(client):
+def test_uses_home_template(client):
     response = client.get("/")
-    assertContains(response, "<title>To-Do</title>")
-    assertContains(response, "<html>")
-    assertContains(response, "</html>")
+    assertTemplateUsed(response, "home.html")
+
+# Smoke Test - Verify we have the right content in the template
+def test_renders_home_content(client):
+    response = client.get("/")
+    assertContains(response, "To-Do")
