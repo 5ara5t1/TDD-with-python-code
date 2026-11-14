@@ -1,5 +1,4 @@
 import time
-
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -15,6 +14,12 @@ def browser():
     browser.set_window_size(1400,900)
     yield browser
     browser.quit()
+
+# Helper function, find row in list table
+def check_for_row_in_list_table(browser, row_text):
+    table = browser.find_element(By.ID, "id_list_table")
+    rows = table.find_elements(By.TAG_NAME, "tr")
+    assert row_text in [row.text for row in rows]
 
 # using plain functions for testing, using liver server fixture
 def test_can_start_a_todo_list(live_server, browser):
@@ -41,11 +46,17 @@ def test_can_start_a_todo_list(live_server, browser):
     inputbox.send_keys(Keys.ENTER)
     time.sleep(1)
 
-    table = browser.find_element(By.ID, "id_list_table")
-    rows = table.find_elements(By.TAG_NAME, "tr")
-
-    assert "1. Buy Peacock Feathers" in [row.text for row in rows]
+    check_for_row_in_list_table(browser, "1. Buy Peacock Feathers")
 
     # There is still a text box inviting her to add another item
     # She enters "use peacock feathers to make fly"
-    pytest.fail("Finish the Tests")
+    inputbox = browser.find_element(By.ID, "id_new_item")
+    inputbox.send_keys("Use peacock feathers to make a fly")
+    inputbox.send_keys(Keys.ENTER)
+    time.sleep(1)
+
+    # the page updates again, but now shows both items on her list
+    check_for_row_in_list_table(browser, "2. Use peacock feathers to make a fly")
+    check_for_row_in_list_table(browser, "1. Buy Peacock Feathers")
+
+    # Certain her tool works, she goes to sleep
