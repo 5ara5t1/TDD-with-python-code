@@ -16,3 +16,4 @@ def test_renders_imput_form(client):
 def test_can_save_a_POST_request(client):
     response = client.post("/", data={"item_text": "A new list item"})
     assertContains(response, "A new list item")
+    assertTemplateUsed(response, "home.html")
