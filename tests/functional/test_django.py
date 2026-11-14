@@ -44,7 +44,7 @@ def test_can_start_a_todo_list(live_server, browser):
     table = browser.find_element(By.ID, "id_list_table")
     rows = table.find_elements(By.TAG_NAME, "tr")
 
-    assert any(row.text == "1. Buy Peacock Feathers" for row in rows), f"New To-Do item did not appear in table, contents were: {table.text}"
+    assert "1. Buy Peacock Feathers" in [row.text for row in rows], f"New To-Do item did not appear in table, contents were: {table.text}"
 
     # There is still a text box inviting her to add another item
     # She enters "use peacock feathers to make fly"
