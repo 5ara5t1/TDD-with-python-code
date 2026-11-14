@@ -4,6 +4,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
+from django.tests import Item
+
+
 
 # Using pytest fixtures
 @pytest.fixture
@@ -14,6 +17,8 @@ def browser():
     browser.set_window_size(1400,900)
     yield browser
     browser.quit()
+
+
 
 # Helper function, find row in list table
 def check_for_row_in_list_table(browser, row_text):
@@ -60,3 +65,6 @@ def test_can_start_a_todo_list(live_server, browser):
     check_for_row_in_list_table(browser, "1. Buy Peacock Feathers")
 
     # Certain her tool works, she goes to sleep
+
+# ORM Testing
+def test_saving_and_retrieving_items()
