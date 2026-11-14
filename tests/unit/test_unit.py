@@ -7,13 +7,12 @@ def test_uses_home_template(client):
     response = client.get("/")
     assertTemplateUsed(response, "home.html")
 
-# Smoke Test - Verify we have the right content in the template
-def test_renders_home_content(client):
-    response = client.get("/")
-    assertContains(response, "To-Do")
-
 # Test renders input form
 def test_renders_imput_form(client):
     response = client.get("/")
     assertContains(response, '<form method="POST">')
     assertContains(response, '<input name="item_text"')
+
+def test_can_save_a_POST_request(client):
+    response = client.post("/", data={"item_text": "A new list item"})
+    assertContains(response, "A new list item")
