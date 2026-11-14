@@ -11,3 +11,8 @@ def test_uses_home_template(client):
 def test_renders_home_content(client):
     response = client.get("/")
     assertContains(response, "To-Do")
+
+# Test renders input form
+def test_renders_imput_form(client):
+    response = client.get("/")
+    assertContains(response, '<form method="POST">')
