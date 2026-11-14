@@ -16,3 +16,4 @@ def test_renders_home_content(client):
 def test_renders_imput_form(client):
     response = client.get("/")
     assertContains(response, '<form method="POST">')
+    assertContains(response, '<input name="item_text"')
