@@ -1,4 +1,5 @@
 from lists.models import Item
+from pytest_django.asserts import assertTemplateUsed
 
 import pytest
 
@@ -21,3 +22,12 @@ def test_saving_and_retrieving_items():
     second_saved_item = saved_items[1]
     assert first_saved_item.text == "The first (ever) list item"
     assert second_saved_item.text == "Item the second"
+
+@pytest.mark.django_db
+def test_can_save_a_POST_request_to_the_database(client):
+    response = client.post("/", data={"item_text": "A new list item"})
+
+    assert Item.objects.count() == 1
+    new_item = Item.objects.first()
+    assert new_item.text == "A new list item"
+    assertTemplateUsed(response, "home.html")
