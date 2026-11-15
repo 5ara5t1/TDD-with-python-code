@@ -39,9 +39,24 @@ def test_can_save_a_POST_request(client):
     assert Item.objects.count() == 1
     new_item = Item.objects.first()
     assert new_item.text == "A new list item"
+
+@pytest.mark.django_db
+def test_redirects_after_POST_request(client):
+    response = client.post("/", data={"item_text": "A new list Item"})
     assertRedirects(response, "/")
 
 @pytest.mark.django_db
 def test_home_page_saves_items_only_when_necessary(client):
     response = client.get("/")
     assert Item.objects.count() == 0
+
+
+@pytest.mark.django_db
+def test_saves_all_list_items(client):
+    Item.objects.create(text="Itemy 1")
+    Item.objects.create(text="Itemy 2")
+
+    response = client.get("/")
+
+    assertContains(response, "Itemy 1")
+    assertContains(response, "Itemy 2")
