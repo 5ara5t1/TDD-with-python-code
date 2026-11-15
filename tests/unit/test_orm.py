@@ -31,3 +31,4 @@ def test_can_save_a_POST_request_to_the_database(client):
     new_item = Item.objects.first()
     assert new_item.text == "A new list item"
     assertTemplateUsed(response, "home.html")
+
