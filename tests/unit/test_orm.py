@@ -1,5 +1,5 @@
 from lists.models import Item
-from pytest_django.asserts import assertTemplateUsed, assertContains
+from pytest_django.asserts import assertTemplateUsed, assertContains, assertRedirects
 
 import pytest
 
@@ -30,14 +30,16 @@ def test_can_save_a_POST_request_to_the_database(client):
     assert Item.objects.count() == 1
     new_item = Item.objects.first()
     assert new_item.text == "A new list item"
-    assertTemplateUsed(response, "home.html")
+
 
 
 @pytest.mark.django_db
 def test_can_save_a_POST_request(client):
     response = client.post("/", data={"item_text": "A new list item"})
-    assertContains(response, "A new list item")
-    assertTemplateUsed(response, "home.html")
+    assert Item.objects.count() == 1
+    new_item = Item.objects.first()
+    assert new_item.text == "A new list item"
+    assertRedirects(response, "/")
 
 @pytest.mark.django_db
 def test_home_page_saves_items_only_when_necessary(client):
