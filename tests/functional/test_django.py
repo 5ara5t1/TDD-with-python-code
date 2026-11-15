@@ -1,11 +1,10 @@
 import time
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
-from lists.models import Item
-
 
 
 # Using pytest fixtures

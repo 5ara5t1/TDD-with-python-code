@@ -1,7 +1,7 @@
-from lists.models import Item
-from pytest_django.asserts import assertTemplateUsed, assertContains, assertRedirects
-
 import pytest
+from pytest_django.asserts import assertContains, assertRedirects
+
+from lists.models import Item
 
 
 # ORM Testing
@@ -25,7 +25,7 @@ def test_saving_and_retrieving_items():
 
 @pytest.mark.django_db
 def test_can_save_a_POST_request_to_the_database(client):
-    response = client.post("/", data={"item_text": "A new list item"})
+    client.post("/", data={"item_text": "A new list item"})
 
     assert Item.objects.count() == 1
     new_item = Item.objects.first()
@@ -35,7 +35,7 @@ def test_can_save_a_POST_request_to_the_database(client):
 
 @pytest.mark.django_db
 def test_can_save_a_POST_request(client):
-    response = client.post("/", data={"item_text": "A new list item"})
+    client.post("/", data={"item_text": "A new list item"})
     assert Item.objects.count() == 1
     new_item = Item.objects.first()
     assert new_item.text == "A new list item"
@@ -47,7 +47,7 @@ def test_redirects_after_POST_request(client):
 
 @pytest.mark.django_db
 def test_home_page_saves_items_only_when_necessary(client):
-    response = client.get("/")
+    client.get("/")
     assert Item.objects.count() == 0
 
 
